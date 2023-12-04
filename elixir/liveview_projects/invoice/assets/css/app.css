@@ -2,4 +2,30 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* This file is for your main application CSS */
+.with-line::before,
+.with-line::after {
+  content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+  text-decoration: line-through;
+}
+
+.landing-grid {
+  display: grid;
+  width: 90%;
+  min-height: 100svh;
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .landing-grid {
+    width: 100%;
+    grid-auto-flow: column;
+    grid-auto-columns: 40% 60%;
+    justify-content: center;
+    gap: 7em;
+  }
+
+  .with-line::before,
+  .with-line::after {
+    content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
+  }
+}

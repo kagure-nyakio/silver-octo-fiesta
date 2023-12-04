@@ -1,0 +1,82 @@
+<mjml>
+  <mj-body background-color="#ffffff">
+    <mj-section padding-bottom="0" padding-top="10%">
+      <mj-column vertical-align="top" width="100%">
+        <mj-text
+          color="#7C5DFA"
+          font-weight="bold"
+          font-style="italic"
+          letter-spacing="3px"
+          font-size="20px"
+          font-family="Space Grotesk, Arial"
+        >
+          GenInvoice
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-bottom="20px" padding-top="20px">
+      <mj-column vertical-align="middle" width="100%">
+        <mj-text
+          align="left"
+          color="#141625"
+          font-size="15px"
+          padding-left="25px"
+          padding-right="25px"
+        >
+          Hi {{ name}}
+          <hr />
+        </mj-text>
+      </mj-column>
+
+      <mj-column vertical-align="middle" width="100%">
+        <mj-text
+          align="left"
+          color="#141625"
+          font-size="18px"
+          color="#252945"
+          line-height="26px"
+          padding-left="25px"
+          padding-right="25px"
+          padding-top="20px"
+        >
+          You can click the button below to change your GenInvoice account
+          email.
+        </mj-text>
+        <mj-button
+          align="left"
+          font-size="22px"
+          padding-top="25px"
+          href="{{ reset_email_url }}"
+          font-weight="bold"
+          background-color="#7C5DFA"
+          border-radius="50px"
+          color="#ffffff"
+          font-family="open Sans Helvetica, Arial, sans-serif"
+        >
+          Change email
+        </mj-button>
+
+        <mj-text
+          align="left"
+          color="#141625"
+          font-size="18px"
+          color="#252945"
+          line-height="26px"
+          padding-left="25px"
+          padding-right="25px"
+          padding-top="20px"
+        >
+          If you didn't request a password reset you can safely ignore this
+          email, it expires in 20 minutes. Only someone with access to this
+          email account can reset your password.
+        </mj-text>
+
+        <mj-text>
+          <br />
+          Cheers! <br />
+          Team GenInvoice
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

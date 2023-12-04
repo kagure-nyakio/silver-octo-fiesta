@@ -194,6 +194,7 @@ defmodule InvoiceWeb.CoreComponents do
   attr :rest, :global,
     include: ~w(autocomplete name rel action enctype method novalidate target multipart),
     doc: "the arbitrary HTML attributes to apply to the form tag"
+  attr :action_class, :string, default: "mt-2 flex items-center justify-between gap-6"
 
   slot :inner_block, required: true
   slot :actions, doc: "the slot for form actions, such as a submit button"
@@ -203,7 +204,7 @@ defmodule InvoiceWeb.CoreComponents do
     <.form :let={f} for={@for} as={@as} {@rest}>
       <div class="mt-10 space-y-8 bg-white">
         <%= render_slot(@inner_block, f) %>
-        <div :for={action <- @actions} class="mt-2 flex items-center justify-between gap-6">
+        <div :for={action <- @actions} class={@action_class}>
           <%= render_slot(action, f) %>
         </div>
       </div>
