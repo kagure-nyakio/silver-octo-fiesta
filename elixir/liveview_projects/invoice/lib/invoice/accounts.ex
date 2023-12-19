@@ -93,6 +93,25 @@ defmodule Invoice.Accounts do
     User.registration_changeset(user, attrs, hash_password: false, validate_email: true)
   end
 
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking user changes.
+
+  ## Examples
+
+      iex> change_user(user)
+      %Ecto.Changeset{data: %User{}}
+
+  """
+  def change_user(%User{} = user, attrs \\ %{}) do
+    Ecto.Changeset.change(user, attrs)
+  end
+
+  def update_user(user, attrs) do
+    user
+    |> change_user(attrs)
+    |> Repo.update
+  end
+
   ## Settings
 
   @doc """

@@ -7,12 +7,12 @@ defmodule Invoice.Accounts.UserAddress do
     field :city, :string
     field :country, :string
     field :street_address, :string
-    field :post_code, :string
+    field :postal_code, :string
   end
 
-  def changeset(address, attrs) do
+  def changeset(%__MODULE__{} = address, attrs \\ %{}) do
     address
-    |> cast(attrs, [:city, :country, :street_address, :post_code])
-    |> validate_required([:city, :country, :street_address, :post_code])
+    |> cast(attrs, [:city, :country, :street_address, :postal_code])
+    |> validate_required([:city, :country, :street_address, :postal_code])
   end
 end

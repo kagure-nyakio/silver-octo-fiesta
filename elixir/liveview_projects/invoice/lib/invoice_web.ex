@@ -85,6 +85,7 @@ defmodule InvoiceWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import InvoiceWeb.CoreComponents
+      import InvoiceWeb.CustomComponents
       import InvoiceWeb.Gettext
 
       # Shortcut for generating JS commands

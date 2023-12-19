@@ -3,34 +3,42 @@ defmodule InvoiceWeb.UserLoginLive do
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
-      <.header class="text-center">
-        Sign in to account
-        <:subtitle>
-          Don't have an account?
-          <.link navigate={~p"/register"} class="font-semibold text-brand hover:underline">
-            Sign up
-          </.link>
-          for an account now.
-        </:subtitle>
-      </.header>
+    <div class="mx-auto landing-grid">
+      <div class="hidden md:block h-full">
+        <img src={~p"/images/landing_illustration.jpg"} alt="" class="h-full w-full object-cover" />
+      </div>
+      <div class="max-w-sm md:max-w-md">
+        <h1 class="text-2xl text-[#252945] font-bold mb-7">
+          Sign in to generate invoices
+        </h1>
 
-      <.simple_form for={@form} id="login_form" action={~p"/login"} phx-update="ignore">
-        <.input field={@form[:email]} type="email" label="Email" required />
-        <.input field={@form[:password]} type="password" label="Password" required />
-
-        <:actions>
-          <.input field={@form[:remember_me]} type="checkbox" label="Keep me logged in" />
-          <.link href={~p"/reset_password"} class="text-sm font-semibold">
-            Forgot your password?
-          </.link>
-        </:actions>
-        <:actions>
-          <.button phx-disable-with="Signing in..." class="w-full">
-            Sign in <span aria-hidden="true">→</span>
-          </.button>
-        </:actions>
-      </.simple_form>
+        <.simple_form
+          for={@form}
+          id="login_form"
+          action_class="w-full"
+          action={~p"/login"}
+          phx-update="ignore"
+          >
+          <.input field={@form[:email]} type="email" label="Email" required />
+          <div class="grid gap-2">
+            <.input field={@form[:password]} type="password" label="Password" required />
+            <.link href={~p"/reset_password"} class="text-sm underline hover:text-brand">
+              Forgot password?
+            </.link>
+          </div>
+          <:actions>
+            <.button phx-disable-with="Signing in..." class="w-full">
+              Sign in <span aria-hidden="true">→</span>
+            </.button>
+            <p class="text-center mt-8">
+              Don't have an account?
+              <.link navigate={~p"/register"} class="font-semibold underline hover:text-brand">
+                Sign up
+              </.link>
+            </p>
+          </:actions>
+        </.simple_form>
+      </div>
     </div>
     """
   end

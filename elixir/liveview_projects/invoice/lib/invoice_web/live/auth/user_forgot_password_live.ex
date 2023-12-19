@@ -5,24 +5,32 @@ defmodule InvoiceWeb.UserForgotPasswordLive do
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
-      <.header class="text-center">
-        Forgot your password?
-        <:subtitle>We'll send a password reset link to your inbox</:subtitle>
-      </.header>
+    <div class="mx-auto landing-grid">
+      <div class="hidden md:block h-full">
+        <img src={~p"/images/landing_illustration.jpg"} alt="" class="h-full w-full object-cover" />
+      </div>
+      <div class="max-w-sm md:max-w-md">
+        <h1 class="text-2xl text-[#252945] font-bold mb-7">
+          Forgot Password?
+        </h1>
 
-      <.simple_form for={@form} id="reset_password_form" phx-submit="send_email">
-        <.input field={@form[:email]} type="email" placeholder="Email" required />
-        <:actions>
-          <.button phx-disable-with="Sending..." class="w-full">
-            Send password reset instructions
-          </.button>
-        </:actions>
-      </.simple_form>
-      <p class="text-center text-sm mt-4">
-        <.link href={~p"/register"}>Register</.link>
-        | <.link href={~p"/login"}>Log in</.link>
-      </p>
+        <p>
+          Enter the email address you used when you joined and we’ll send you instructions to reset your password.
+        </p>
+
+        <p class="mt-8">
+          For security reasons, we do NOT store your password. So rest assured that we will never send your password via email.
+        </p>
+
+        <.simple_form for={@form} id="reset_password_form" phx-submit="send_email">
+          <.input field={@form[:email]} type="email" placeholder="Email" required />
+          <:actions>
+            <.button phx-disable-with="Sending..." class="w-full">
+              Send reset instructions
+            </.button>
+          </:actions>
+        </.simple_form>
+      </div>
     </div>
     """
   end
@@ -40,11 +48,11 @@ defmodule InvoiceWeb.UserForgotPasswordLive do
     end
 
     info =
-      "If your email is in our system, you will receive instructions to reset your password shortly."
+      "If this email address was used to create an account, instructions to reset your password will be sent to you. Please check your email."
 
     {:noreply,
      socket
      |> put_flash(:info, info)
-     |> redirect(to: ~p"/")}
+     |> redirect(to: ~p"/login")}
   end
 end

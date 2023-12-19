@@ -5,6 +5,8 @@ defmodule Invoice.Accounts.User do
 
   alias Invoice.Accounts.UserAddress
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
   schema "users" do
     field :email, :string
     field :username, :string
@@ -12,7 +14,7 @@ defmodule Invoice.Accounts.User do
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
 
-    embeds_one :address, UserAddress
+    embeds_one :address, UserAddress, on_replace: :update
 
     timestamps(type: :utc_datetime)
   end
@@ -63,7 +65,9 @@ defmodule Invoice.Accounts.User do
     |> validate_length(:password, min: 12, max: 72)
     |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
     |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
-    |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")
+    |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/,
+      message: "at least one digit or punctuation character"
+    )
     |> maybe_hash_password(opts)
   end
 

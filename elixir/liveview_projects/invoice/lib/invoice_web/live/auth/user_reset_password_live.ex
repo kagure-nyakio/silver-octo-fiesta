@@ -5,35 +5,38 @@ defmodule InvoiceWeb.UserResetPasswordLive do
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
-      <.header class="text-center">Reset Password</.header>
+    <div class="mx-auto landing-grid">
+      <div class="hidden md:block h-full">
+        <img src={~p"/images/landing_illustration.jpg"} alt="" class="h-full w-full object-cover" />
+      </div>
 
-      <.simple_form
-        for={@form}
-        id="reset_password_form"
-        phx-submit="reset_password"
-        phx-change="validate"
-      >
-        <.error :if={@form.errors != []}>
-          Oops, something went wrong! Please check the errors below.
-        </.error>
+      <div class="max-w-sm md:max-w-md">
+        <h1 class="text-2xl text-[#252945] font-bold mb-7">
+          Reset Password
+        </h1>
 
-        <.input field={@form[:password]} type="password" label="New password" required />
-        <.input
-          field={@form[:password_confirmation]}
-          type="password"
-          label="Confirm new password"
-          required
-        />
-        <:actions>
-          <.button phx-disable-with="Resetting..." class="w-full">Reset Password</.button>
-        </:actions>
-      </.simple_form>
+        <.simple_form
+          for={@form}
+          id="reset_password_form"
+          phx-submit="reset_password"
+          phx-change="validate"
+        >
+          <.error :if={@form.errors != []}>
+            Oops, something went wrong! Please check the errors below.
+          </.error>
 
-      <p class="text-center text-sm mt-4">
-        <.link href={~p"/register"}>Register</.link>
-        | <.link href={~p"/login"}>Log in</.link>
-      </p>
+          <.input field={@form[:password]} type="password" label="New password" required />
+          <.input
+            field={@form[:password_confirmation]}
+            type="password"
+            label="Confirm new password"
+            required
+          />
+          <:actions>
+            <.button phx-disable-with="Resetting..." class="w-full">Reset Password</.button>
+          </:actions>
+        </.simple_form>
+      </div>
     </div>
     """
   end

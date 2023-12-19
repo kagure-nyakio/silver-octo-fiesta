@@ -64,7 +64,7 @@ defmodule Invoice.Accounts.UserNotifier do
       ResetPasswordInstructions.render(
         reset_password_url: url,
         email: user.email,
-        name: user.name
+        name: user.username
       )
 
     text_body = reset_password_instructions_text(user, url)

@@ -22,7 +22,6 @@ defmodule InvoiceWeb.UserConfirmationLive do
       {:ok, _} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Welcome aboard!")
          |> redirect(to: ~p"/get-started")}
 
       :error ->

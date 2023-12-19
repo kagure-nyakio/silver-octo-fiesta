@@ -8,6 +8,7 @@ defmodule Invoice.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      {Invoice.Cities, []},
       InvoiceWeb.Telemetry,
       Invoice.Repo,
       {DNSCluster, query: Application.get_env(:invoice, :dns_cluster_query) || :ignore},
