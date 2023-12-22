@@ -6,7 +6,7 @@ defmodule InvoiceWeb.UserResetPasswordLive do
   def render(assigns) do
     ~H"""
     <div class="mx-auto landing-grid">
-      <div class="hidden md:block h-full">
+      <div class="hidden md:block h-full bg-slate-300">
         <img src={~p"/images/landing_illustration.jpg"} alt="" class="h-full w-full object-cover" />
       </div>
 

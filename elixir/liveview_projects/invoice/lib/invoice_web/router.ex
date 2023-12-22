@@ -64,9 +64,8 @@ defmodule InvoiceWeb.Router do
       live "/settings/confirm_email/:token", UserSettingsLive, :confirm_email
 
       live "/get-started", GetStartedLive
+      live "/", Invoice.InvoiceLive
     end
-
-    get "/", PageController, :home
   end
 
   scope "/", InvoiceWeb do

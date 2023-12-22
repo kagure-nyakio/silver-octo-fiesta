@@ -2,44 +2,43 @@ defmodule InvoiceWeb.GetStartedLive do
   use InvoiceWeb, :live_view
 
   alias Invoice.Accounts
-  alias Invoice.Cities
 
   def render(assigns) do
     ~H"""
-    <h1>One more step</h1>
-    <p>Fill in your address details</p>
+    <div class="mx-auto landing-grid">
+      <div class="hidden md:block h-full bg-slate-300">
+        <img src={~p"/images/almost_there.png"} alt="" class="h-full w-full object-cover" />
+      </div>
 
-    <.simple_form for={@form} id="address-form" phx-submit="save">
-      <.error :if={@check_errors}>
-        Oops, something went wrong! Please check the errors below.
-      </.error>
+      <div class="mx-auto sm:mx-0 max-w-sm  sm:max-w-md py-2">
+        <h1 class="text-2xl text-[#252945] font-bold mb-7">One more step</h1>
+        <p>Fill in your address details</p>
 
-      <.inputs_for :let={f} field={@form[:address]}>
-        <.input
-          field={f[:country]}
-          type="select"
-          label="Country"
-          multiple={false}
-          options={@countries}
-          required
-          phx-change="assign_cities"
-        />
-        <.input
-          field={f[:city]}
-          type="select"
-          label="City/Town"
-          multiple={false}
-          options={@cities}
-          required
-        />
-        <.input field={f[:street_address]} type="text" label="Street Address" required />
-        <.input field={f[:postal_code]} type="text" label="Postal Code" required />
-      </.inputs_for>
+        <.simple_form for={@form} id="address-form" phx-submit="save">
+          <.error :if={@check_errors}>
+            Oops, something went wrong! Please check the errors below.
+          </.error>
 
-      <:actions>
-        <.button phx-disable-with="Updating address..." class="w-full">Submit</.button>
-      </:actions>
-    </.simple_form>
+          <.inputs_for :let={f} field={@form[:address]}>
+            <.input
+              field={f[:country]}
+              type="select"
+              label="Country"
+              multiple={false}
+              options={@countries}
+              required
+            />
+            <.input field={f[:city]} type="text" label="City" required />
+            <.input field={f[:street_address]} type="text" label="Street Address" required />
+            <.input field={f[:postal_code]} type="text" label="Postal Code" required />
+          </.inputs_for>
+
+          <:actions>
+            <.button phx-disable-with="Updating address..." class="w-full">Submit</.button>
+          </:actions>
+        </.simple_form>
+      </div>
+    </div>
     """
   end
 
@@ -51,16 +50,9 @@ defmodule InvoiceWeb.GetStartedLive do
      socket
      |> assign(:trigger_submit, false)
      |> assign(:check_errors, false)
-     |> assign(:countries, assign_countries_list())
-     |> assign(:cities, [])
+     |> assign(:countries, assign_countries())
      |> assign(:current_user, current_user)
      |> assign_form(changeset)}
-  end
-
-  def handle_event("assign_cities", params, socket) do
-    %{"address" => %{"address" => %{"country" => country}}} = params
-
-    {:noreply, assign(socket, :cities, Cities.get_cities_by_country(country))}
   end
 
   def handle_event(
@@ -102,9 +94,10 @@ defmodule InvoiceWeb.GetStartedLive do
     end
   end
 
-  defp assign_countries_list() do
+  defp assign_countries() do
     Countries.all()
-    |> Enum.map(& &1.name)
+    |> Stream.map(&Map.get(&1, :name))
+    |> Enum.to_list()
   end
 
   defp assign_form(socket, %Ecto.Changeset{} = changeset) do
